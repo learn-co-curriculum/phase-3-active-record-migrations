@@ -6,7 +6,7 @@
 
 ## Setup
 
-1) We're going to be using the activerecord gem to create a mapping between our database and model.
+1) We're going to be using the `activerecord` gem to create a mapping between our database and model.
 
 2) Take a look at the Gemfile in this directory. Be sure to run `bundle install`.
 
@@ -20,9 +20,11 @@ Another way to think of migrations is like version control for your database. Yo
 
 Executed migrations are tracked by ActiveRecord in your database, so they aren't used twice. Using the migrations system to apply the schema changes is easier than keeping track of the changes manually and executing them manually at the appropriate time.
 
-1) make a directory in this directory called `db`. Then within the `db` directory, create a `migrate` directory.
+### Setting Up Your Migration
 
-2) In the migrate directory, create a file called '01_create_artists.rb' (we'll talk about why we added the 01 later).
+1. Make a directory in this directory called `db`. Then within the `db` directory, create a `migrate` directory.
+
+2. In the migrate directory, create a file called `01_create_artists.rb` (we'll talk about why we added the 01 later).
 
 ```ruby
 # db/migrate/01_create_artists.rb
@@ -35,6 +37,8 @@ class CreateArtists < ActiveRecord::Migration
   end
 end
 ```
+
+### Active Record Migration Methods: up, down, change
 
 Here we're creating a class called `CreateArtists` which inherits from ActiveRecord's `ActiveRecord::Migration` module. Within the class we have an `up` method to define what code to execute when the migration is run, and in the `down` method we define what code to execute when the migration is rolled back. Think of it like "do" and "undo."
 
@@ -52,6 +56,8 @@ end
 
 Which is just short for do this, and then undo it on rollback. Let's look at creating the rest of the migration to generate our artists table and add some columns.
 
+### Creating a Table
+
 ```ruby
 # db/migrate/01_create_artists.rb
 def change
@@ -60,7 +66,7 @@ def change
 end
 ```
 
-Here we've added the create_table method, and passed the name of the table we want to create as a symbol. Pretty simple, right? Other methods we can use here are things like `remove_table`, `rename_table`, `remove_column`, `add_column` and others. See [this list](http://guides.rubyonrails.org/migrations.html#writing-a-migration) for more.
+Here we've added the `create_table` method, and passed the name of the table we want to create as a symbol. Pretty simple, right? Other methods we can use here are things like `remove_table`, `rename_table`, `remove_column`, `add_column` and others. See [this list](http://guides.rubyonrails.org/migrations.html#writing-a-migration) for more.
 
 No point in having a table that has no columns in it, so lets add a few:
 
@@ -83,7 +89,7 @@ Looks a little familiar? On the left we've given the data type we'd like to cast
 
 And that's it! You've created your first ActiveRecord migration. Next, we're going to see it in action!
 
-3) Running migrations
+### Running Migrations
 
 The simplest way to run our migrations is with ActiveRecord's through a raketask that we're given through the activerecord gem. How do we access these?
 
