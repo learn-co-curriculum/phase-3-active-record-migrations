@@ -237,6 +237,3 @@ Oh good, your job is saved. Thanks ActiveRecord! Now when the boss says it's act
 `rake db:migrate`
 
 Woohoo!
-
-## Resources
-* [Wikipedia](http://en.wikipedia.org/) - [Object-Relational Mapping](http://en.wikipedia.org/wiki/Object-relational_mapping)
