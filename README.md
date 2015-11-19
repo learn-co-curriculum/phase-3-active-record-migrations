@@ -58,6 +58,35 @@ Which is just short for do this, and then undo it on rollback. Let's look at cre
 
 ### Creating a Table
 
+Remember how we created a table using SQL with ActiveRecord.
+
+First, we'd have to connect to a database:
+
+```ruby
+connection = ActiveRecord::Base.establish_connection(
+  :adapter => "sqlite3",
+  :database => "db/songs.sqlite"
+)
+
+
+```
+Then, we'd create our table using SQL:
+
+```ruby
+sql = <<-SQL
+  CREATE TABLE IF NOT EXISTS songs (
+  id INTEGER PRIMARY KEY, 
+  title TEXT, 
+  length INTEGER
+  )
+SQL
+
+ActiveRecord::Base.connection.execute(sql)
+```
+
+Now that we have access to `ActiveRecord::Migration`, we can create tables using only Ruby. Yay!
+
+
 ```ruby
 # db/migrate/01_create_artists.rb
 def change
