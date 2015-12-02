@@ -272,3 +272,5 @@ Oh good, your job is saved. Thanks ActiveRecord! Now when the boss says it's act
 `rake db:migrate`
 
 Woohoo!
+
+<a href='https://learn.co/lessons/mechanics-of-migrations' data-visibility='hidden'>View this lesson on Learn.co</a>
