@@ -124,7 +124,7 @@ The simplest way to run our migrations through a raketask that we're given throu
 
 Run `rake -T` to see the list of commands we have.
 
-Let's look the `Rakefile`. The way in which we get these commands as raketasks is through `require 'sinatra/activerecord/rake'`.
+Let's look at the `Rakefile`. The way in which we get these commands as raketasks is through `require 'sinatra/activerecord/rake'`.
 
 Now take a look at `environment.rb`, which our Rakefile also requires:
 
@@ -192,7 +192,7 @@ a.save
 #=> true
 ```
 
-The `.new` method creates a new instance in memory, be in order for that instance to persist, we need to save it. If we want to create a new instance and save it all in on go, we can use `.create`.
+The `.new` method creates a new instance in memory, but in order for that instance to persist, we need to save it. If we want to create a new instance and save it all in one go, we can use `.create`.
 
 ```ruby
 Artist.create(name: 'Kelly')
@@ -272,5 +272,3 @@ Oh good, your job is saved. Thanks ActiveRecord! Now when the boss says it's act
 `rake db:migrate`
 
 Woohoo!
-
-<a href='https://learn.co/lessons/mechanics-of-migrations' data-visibility='hidden'>View this lesson on Learn.co</a>
