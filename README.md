@@ -120,7 +120,7 @@ And that's it! You've created your first ActiveRecord migration. Next, we're goi
 
 ### Running Migrations
 
-The simplest way to run our migrations through a raketask that we're given through the activerecord gem. How do we access these?
+The simplest way is to run our migrations through a raketask that we're given through the activerecord gem. How do we access these?
 
 Run `rake -T` to see the list of commands we have.
 
@@ -274,3 +274,5 @@ Oh good, your job is saved. Thanks ActiveRecord! Now when the boss says it's act
 Woohoo!
 
 -<a href='https://learn.co/lessons/mechanics-of-migrations' data-visibility='hidden'>View this lesson on Learn.co</a>
+
+<a href='https://learn.co/lessons/mechanics-of-migrations' data-visibility='hidden'>View this lesson on Learn.co</a>
