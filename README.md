@@ -22,7 +22,7 @@ Executed migrations are tracked by ActiveRecord in your database, so they aren't
 
 ### Setting Up Your Migration
 
-1. If you haven't done so already, fork and clone this repository via Github. (This is marked as a Readme so you'll need to open this on Github.) Make a directory in this directory called `db`. Then within the `db` directory, create a `migrate` directory.
+1. If you haven't done so already, fork and clone this repository via Github. (This is marked as a Readme so you'll need to open this on Github.) Make a directory in the directory called `db`. Then within the `db` directory, create a `migrate` directory.
 
 2. In the migrate directory, create a file called `01_create_artists.rb` (we'll talk about why we added the 01 later).
 
@@ -276,3 +276,5 @@ Woohoo!
 -<a href='https://learn.co/lessons/mechanics-of-migrations' data-visibility='hidden'>View this lesson on Learn.co</a>
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/mechanics-of-migrations' title='Let's Learn About Migrations'>Let's Learn About Migrations</a> on Learn.co and start learning to code for free.</p>
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/mechanics-of-migrations'>Mechanics of Migrations</a> on Learn.co and start learning to code for free.</p>
