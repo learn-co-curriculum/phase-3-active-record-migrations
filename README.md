@@ -160,7 +160,7 @@ class Artist < ActiveRecord::Base
 end
 ```
 
-To test it out, let's use the raketask `rake console`, which we've created in the `Rakefile`.
+To test it out, let's use the rake task `rake console`, which we've created in the `Rakefile`.
 
 
 ### Try out the following:
