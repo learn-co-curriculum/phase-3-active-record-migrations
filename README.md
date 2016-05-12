@@ -75,8 +75,8 @@ Then, we'd create our table using SQL:
 ```ruby
 sql = <<-SQL
   CREATE TABLE IF NOT EXISTS songs (
-  id INTEGER PRIMARY KEY, 
-  title TEXT, 
+  id INTEGER PRIMARY KEY,
+  title TEXT,
   length INTEGER
   )
 SQL
@@ -272,9 +272,5 @@ Oh good, your job is saved. Thanks ActiveRecord! Now when the boss says it's act
 `rake db:migrate`
 
 Woohoo!
-
--<a href='https://learn.co/lessons/mechanics-of-migrations' data-visibility='hidden'>View this lesson on Learn.co</a>
-
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/mechanics-of-migrations' title='Let's Learn About Migrations'>Let's Learn About Migrations</a> on Learn.co and start learning to code for free.</p>
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/mechanics-of-migrations'>Mechanics of Migrations</a> on Learn.co and start learning to code for free.</p>
