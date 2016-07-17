@@ -238,7 +238,7 @@ Pretty awesome, right? We basically just told ActiveRecord to add a column to th
 
 Notice how we incremented the number in the file name there? Imagine for a minute that you deleted your original database and wanted to execute the migrations again. ActiveRecord is going to execute each file, but it has to do so in some order and it happens to do that in alpha-numerical order. If we didn't have the numbers, our add_column migration would have tried to run first ('a' comes before 'c') and our artists table wouldn't have even been created yet! So we used some numbers to make sure they execute in order. In reality our two-digit system is very rudimentary. As you'll see later on, frameworks like rails have generators that create migrations with very accurate timestamps so you'll never have that problem.
 
-Now that you've save the migration, back to the terminal to run it:
+Now that you've saved the migration, back to the terminal to run it:
 
 `rake db:migrate`
 
@@ -274,3 +274,5 @@ Oh good, your job is saved. Thanks ActiveRecord! Now when the boss says it's act
 Woohoo!
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/mechanics-of-migrations'>Mechanics of Migrations</a> on Learn.co and start learning to code for free.</p>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/mechanics-of-migrations'>Mechanics of Migrations</a> on Learn.co and start learning to code for free.</p>
