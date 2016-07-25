@@ -63,6 +63,8 @@ Remember how we created a table using SQL with ActiveRecord.
 First, we'd have to connect to a database:
 
 ```ruby
+# config/environment.rb
+
 connection = ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
   :database => "db/songs.sqlite"
@@ -73,6 +75,8 @@ connection = ActiveRecord::Base.establish_connection(
 Then, we'd create our table using SQL:
 
 ```ruby
+# artist.rb
+
 sql = <<-SQL
   CREATE TABLE IF NOT EXISTS songs (
   id INTEGER PRIMARY KEY,
@@ -129,6 +133,8 @@ Let's look at the `Rakefile`. The way in which we get these commands as raketask
 Now take a look at `environment.rb`, which our Rakefile also requires:
 
 ```ruby
+# config/environment.rb
+
 require 'bundler/setup'
 Bundler.require
 
@@ -157,6 +163,26 @@ Next, we'll extend the class with `ActiveRecord::Base`
 # artist.rb
 
 class Artist < ActiveRecord::Base
+end
+```
+
+Last, we need to create our `artists` table with SQL
+
+```ruby
+# artist.rb
+
+class Artist < ActiveRecord::Base
+  def self.create_table
+    sql = <<-SQL
+    CREATE TABLE IF NOT EXISTS songs (
+      id INTEGER PRIMARY KEY,
+      title TEXT,
+      length INTEGER
+    )
+    SQL
+
+    ActiveRecord::Base.connection.execute(sql)
+  end
 end
 ```
 
@@ -238,7 +264,7 @@ Pretty awesome, right? We basically just told ActiveRecord to add a column to th
 
 Notice how we incremented the number in the file name there? Imagine for a minute that you deleted your original database and wanted to execute the migrations again. ActiveRecord is going to execute each file, but it has to do so in some order and it happens to do that in alpha-numerical order. If we didn't have the numbers, our add_column migration would have tried to run first ('a' comes before 'c') and our artists table wouldn't have even been created yet! So we used some numbers to make sure they execute in order. In reality our two-digit system is very rudimentary. As you'll see later on, frameworks like rails have generators that create migrations with very accurate timestamps so you'll never have that problem.
 
-Now that you've saved the migration, back to the terminal to run it:
+Now that you've saved the migration, go back to the terminal to run it:
 
 `rake db:migrate`
 
