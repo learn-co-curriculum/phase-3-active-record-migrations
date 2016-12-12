@@ -77,7 +77,7 @@ end
 From [the Active Record Migrations RailsGuide](http://edgeguides.rubyonrails.org/active_record_migrations.html#using-the-change-method):
 >The change method is the primary way of writing migrations. It works for the majority of cases, where Active Record knows how to reverse the migration automatically
 
-`change` is short for do this, and then undo it on rollback. Let's look at creating the rest of the migration to generate our artists table and add some columns.
+Let's take a look at how to finish off our `CreateArtists` migration, which will generate our `artists` table with the appropriate columns.
 
 ### Creating a Table
 
@@ -116,7 +116,7 @@ def change
 end
 ```
 
-Here we've added the `create_table` method, and passed the name of the table we want to create as a symbol. Pretty simple, right? Other methods we can use here are things like `remove_table`, `rename_table`, `remove_column`, `add_column` and others. See [this list](http://guides.rubyonrails.org/migrations.html#writing-a-migration) for more.
+Here we've added the `create_table` method and passed the name of the table we want to create as a symbol. Pretty simple, right? Other methods we can use here are things like `remove_table`, `rename_table`, `remove_column`, `add_column` and others. See [this list](http://guides.rubyonrails.org/migrations.html#writing-a-migration) for more.
 
 No point in having a table that has no columns in it, so lets add a few:
 
