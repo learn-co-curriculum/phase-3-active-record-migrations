@@ -78,7 +78,7 @@ Then, we'd create our table using SQL:
 # artist.rb
 
 sql = <<-SQL
-  CREATE TABLE IF NOT EXISTS songs (
+  CREATE TABLE IF NOT EXISTS artists (
   id INTEGER PRIMARY KEY,
   title TEXT,
   length INTEGER
