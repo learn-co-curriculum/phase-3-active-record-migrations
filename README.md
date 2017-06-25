@@ -97,8 +97,10 @@ Then, we'd create our table using SQL:
 sql = <<-SQL
   CREATE TABLE IF NOT EXISTS artists (
   id INTEGER PRIMARY KEY,
-  title TEXT,
-  length INTEGER
+  name TEXT,
+  genre TEXT,
+  age INTEGER,
+  hometown TEXT
   )
 SQL
 
