@@ -11,10 +11,10 @@
 2) While this is marked as a Readme, fork and clone this repository. Take a look at the Gemfile in this directory. Be sure to run `bundle install`.
 
 ## Migrations
+From [the _RailsGuides_ section on Migrations](http://guides.rubyonrails.org/v3.2.8/migrations.html):
+>Migrations are a convenient way for you to alter your database in a structured and organized manner. You could edit fragments of SQL by hand but you would then be responsible for telling other developers that they need to go and run them. You’d also have to keep track of which changes need to be run against the production machines next time you deploy.
 
-Migrations are a convenient way for you to alter your database in a structured and organized manner. You could edit fragments of SQL by hand but you would then be responsible for telling other developers that they need to go and run them. You’d also have to keep track of which changes need to be run against the production machines next time you deploy.
-
-Migrations also allow you to describe these transformations using Ruby. The great thing about this is that it is database independent: you don’t need to worry about the precise syntax of `CREATE TABLE` any more than you worry about variations on `SELECT *` (you can, however, drop down to raw SQL for database-specific features). For example, you could use SQLite3 during development, but Postgres in production.
+>Migrations also allow you to describe these transformations using Ruby. The great thing about this is that (like most of Active Record’s functionality) it is database independent: you don’t need to worry about the precise syntax of `CREATE TABLE` any more than you worry about variations on `SELECT *` (you can drop down to raw SQL for database specific features). For example, you could use SQLite3 in development, but MySQL in production.
 
 Another way to think of migrations is like version control for your database. You might create a table, add some data to it, and then make some changes to it later on. By adding a new migration for each change you make to the database, you won't lose any data you don't want to, and you can easily revert changes.
 
