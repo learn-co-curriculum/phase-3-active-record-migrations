@@ -6,9 +6,9 @@
 
 ## Setup
 
-1) We're going to be using the `activerecord` gem to create a mapping between our database and model.
+1) We're going to use the `activerecord` gem to create a mapping between our database and model.
 
-2) While this is marked as a Readme, fork and clone this repository. Take a look at the Gemfile in this directory. Be sure to run `bundle install`.
+2) While this is marked as a Readme, fork and clone this repository. Take a look at the `Gemfile` in this directory. Be sure to run `bundle install`.
 
 ## Migrations
 From [the _RailsGuides_ section on Migrations](http://guides.rubyonrails.org/v3.2.8/migrations.html):
@@ -23,7 +23,7 @@ Executed migrations are tracked by ActiveRecord in your database so that they ar
 ### Setting Up Your Migration
 
 1. If you haven't done so already, [fork and clone this repository via GitHub](https://github.com/learn-co-students/mechanics-of-migrations-v-000). Create a directory called `db` at the top level of the lesson's directory. Then, within the `db` directory, create a `migrate` directory.
-
+    - ***Note***: If you're using the Learn IDE, make sure you create both directories with the `mkdir` command in your IDE terminal. If you create these directories any other way, you'll encounter a permissions error when you try to run `rake db:migrate` later.
 2. In the migrate directory, create a file called `01_create_artists.rb` (we'll talk about why we added the `01` later).
 ```
 mechanics-of-migrations-v-000/
