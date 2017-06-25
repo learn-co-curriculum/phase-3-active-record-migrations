@@ -88,7 +88,7 @@ First, we'd have to connect to a database:
 ```ruby
 connection = ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
-  :database => "db/songs.sqlite"
+  :database => "db/artists.sqlite"
 )
 ```
 Then, we'd create our table using SQL:
