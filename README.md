@@ -6,11 +6,18 @@
 
 ## Setup
 
-1) We're going to use the `activerecord` gem to create a mapping between our
-database and model.
-
-2) While this is marked as a Readme, fork and clone this repository. Take a
-look at the `Gemfile` in this directory. Be sure to run `bundle install`.
+1. We're going to use the `activerecord` gem to create a mapping between our
+   database and model.
+2. While this is marked as a Readme, you should code-along with this document.
+   If you have access to a Flatiron School sandbox (you'll see a blue button up
+   top), launch it. If you're working on a local system, simply open a new
+   terminal window.
+3. Once you're in a terminal environment, issue `git clone <clone source
+   path>`. You'll find the path by clicking on the "Clone or download" button
+   at the [repo][].
+4. `cd` into the cloned directory e.g. `cd mechanics-of-migrations-v-000/`
+5. Ensure you can `bundle` in the directory: `bundle install`
+6. If that works, then you're ready to proceed.
 
 ## Migrations
 
@@ -41,15 +48,11 @@ at the appropriate time.
 
 ### Setting Up Your Migration
 
-1. If you haven't done so already, fork and clone [this repository][repo].
-   Create a directory called `db` at the top level of the lesson's directory.
-   Then, within the `db` directory, create a `migrate` directory.
-    - ***Note***: If you're using the Learn IDE, make sure you create both
-      directories with the `mkdir` command in your IDE terminal. If you create
-   these directories any other way, you'll encounter a permissions error when you
-   try to run `rake db:migrate` later.
-2. In the migrate directory, create a file called `01_create_artists.rb` (we'll
-   talk about why we added the `01` later).
+1. Create a directory called `db` at the top level of the lesson's directory.
+   Then, within the `db` directory, create a `migrate` directory. The
+   `mkdir` command is the appropriate tool to use here.
+2. In the `db/migrate ` directory, create a file called `01_create_artists.rb`
+   (we'll talk about why we added the `01` later).
 
 ```text
 mechanics-of-migrations-v-000/
