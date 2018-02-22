@@ -16,11 +16,11 @@ look at the `Gemfile` in this directory. Be sure to run `bundle install`.
 
 From [the _RailsGuides_ section on Migrations][guide-migrations]:
 
->Migrations are a convenient way for you to alter your database in a structured
->and organized manner. You could edit fragments of SQL by hand but you would
->then be responsible for telling other developers that they need to go and run
->them. You’d also have to keep track of which changes need to be run against
->the production machines next time you deploy.
+> Migrations are a convenient way for you to alter your database in a structured
+> and organized manner. You could edit fragments of SQL by hand but you would
+> then be responsible for telling other developers that they need to go and run
+> them. You’d also have to keep track of which changes need to be run against
+> the production machines next time you deploy.
 
 > Migrations also allow you to describe these transformations using Ruby. The
 > great thing about this is that (like most of Active Record’s functionality)
@@ -297,9 +297,7 @@ Artist.find_by(name: 'Jon')
 There are a number of methods you can now use to create, retrieve, update, and
 delete data from your database, and a whole lot more.
 
-Take a look at these [CRUD
-methods][crud],
-and play around with them.
+Take a look at these [CRUD methods][crud], and play around with them.
 
 ## Using Migrations To Manipulate Existing Tables
 
