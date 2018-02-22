@@ -14,7 +14,7 @@ look at the `Gemfile` in this directory. Be sure to run `bundle install`.
 
 ## Migrations
 
-From [the _RailsGuides_ section on Migrations](http://guides.rubyonrails.org/v3.2.8/migrations.html):
+From [the _RailsGuides_ section on Migrations][guide-migrations]:
 
 >Migrations are a convenient way for you to alter your database in a structured
 >and organized manner. You could edit fragments of SQL by hand but you would
@@ -41,9 +41,16 @@ at the appropriate time.
 
 ### Setting Up Your Migration
 
-1. If you haven't done so already, [fork and clone this repository via GitHub](https://github.com/learn-co-students/mechanics-of-migrations-v-000). Create a directory called `db` at the top level of the lesson's directory. Then, within the `db` directory, create a `migrate` directory.
-    - ***Note***: If you're using the Learn IDE, make sure you create both directories with the `mkdir` command in your IDE terminal. If you create these directories any other way, you'll encounter a permissions error when you try to run `rake db:migrate` later.
-2. In the migrate directory, create a file called `01_create_artists.rb` (we'll talk about why we added the `01` later).
+1. If you haven't done so already, fork and clone [this repository][repo].
+   Create a directory called `db` at the top level of the lesson's directory.
+   Then, within the `db` directory, create a `migrate` directory.
+    - ***Note***: If you're using the Learn IDE, make sure you create both
+      directories with the `mkdir` command in your IDE terminal. If you create
+   these directories any other way, you'll encounter a permissions error when you
+   try to run `rake db:migrate` later.
+2. In the migrate directory, create a file called `01_create_artists.rb` (we'll
+   talk about why we added the `01` later).
+
 ```text
 mechanics-of-migrations-v-000/
   config/
@@ -99,7 +106,7 @@ end
 
 ```
 
-From [the Active Record Migrations RailsGuide](http://edgeguides.rubyonrails.org/active_record_migrations.html#using-the-change-method):
+From [the Active Record Migrations RailsGuide][change-method]:
 
 >The change method is the primary way of writing migrations. It works for the
 >majority of cases, where Active Record knows how to reverse the migration
@@ -152,9 +159,7 @@ end
 Here we've added the `create_table` method and passed the name of the table we
 want to create as a symbol. Pretty simple, right? Other methods we can use here
 are things like `remove_table`, `rename_table`, `remove_column`, `add_column`
-and others. See [this
-list](http://guides.rubyonrails.org/migrations.html#writing-a-migration) for
-more.
+and others. See [this list][writing-mig] for more.
 
 No point in having a table that has no columns in it, so lets add a few:
 
@@ -236,7 +241,7 @@ To test our newly-created class out, let's use the rake task `rake console`,
 which we've created in the `Rakefile`.
 
 
-### Try out the following:
+### Try Out The Following:
 
 Check that the class exists:
 
@@ -293,7 +298,7 @@ There are a number of methods you can now use to create, retrieve, update, and
 delete data from your database, and a whole lot more.
 
 Take a look at these [CRUD
-methods](http://guides.rubyonrails.org/active_record_basics.html#crud-reading-and-writing-data),
+methods][crud],
 and play around with them.
 
 ## Using Migrations To Manipulate Existing Tables
@@ -370,3 +375,9 @@ actually time to add that column, you can just run `rake db:migrate` again!
 Woohoo!
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/mechanics-of-migrations'>Mechanics of Migrations</a> on Learn.co and start learning to code for free.</p>
+
+[guide-migrations]: http://guides.rubyonrails.org/v3.2.8/migrations.html
+[repo]: https://github.com/learn-co-students/mechanics-of-migrations-v-000
+[change-method]: http://edgeguides.rubyonrails.org/active_record_migrations.html#using-the-change-method
+[writing-mig]: http://guides.rubyonrails.org/migrations.html#writing-a-migration
+[crud]: http://guides.rubyonrails.org/active_record_basics.html#crud-reading-and-writing-data
