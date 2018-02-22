@@ -17,7 +17,8 @@
    at the [repo][].
 4. `cd` into the cloned directory e.g. `cd mechanics-of-migrations-v-000/`
 5. Ensure you can `bundle` in the directory: `bundle install`
-6. If that works, then you're ready to proceed.
+6. If that works, then you're ready to proceed. If not, use a help resource
+   like Ask a Question or ask a facilitator.
 
 ## Migrations
 
@@ -192,13 +193,13 @@ going to see it in action!
 
 ### Running Migrations
 
-The simplest way is to run our migrations through a raketask that we're given
+The simplest way is to run our migrations through a Rake task that we're given
 through the `activerecord` gem. How do we access these?
 
 Run `rake -T` to see the list of commands we have.
 
 Let's look at the `Rakefile`. The way in which we get these commands as
-raketasks is through `require 'sinatra/activerecord/rake'`.
+Rake tasks is through `require 'sinatra/activerecord/rake'`.
 
 Now take a look at `environment.rb`, which our Rakefile also requires:
 
