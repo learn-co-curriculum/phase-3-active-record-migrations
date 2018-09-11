@@ -223,6 +223,8 @@ via SQLite3 (the adapter).
 After we've added the above code to `config/environment.rb`, it's time to run
 `rake db:migrate`.
 
+*Top Tip: If you encounter an error after running `rake db:migrate`, try running `bundle exec rake db:migrate`.*
+
 4) Take a look at `artist.rb`. Let's create an Artist class.
 
 ```ruby
