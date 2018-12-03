@@ -123,10 +123,12 @@ will generate our `artists` table with the appropriate columns.
 
 Remember how we created a table using SQL with ActiveRecord.
 
+> **NOTE**: Recall, we can do this with IRB: `irb -r active_record`
+
 First, we'd have to connect to a database:
 
 ```ruby
-connection = ActiveRecord::Base.establish_connection(
+ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
   :database => "db/artists.sqlite"
 )
