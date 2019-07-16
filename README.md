@@ -86,14 +86,14 @@ end
 **IMPORTANT**: Active Record is primarily used in Rails applications and as of
 Active Record 5.x, we must specify which version of Rails the migration
 was written for, even in situations like this lab where we do not have Rails
-set up.
+configured.
 
-This lesson was originally created with gem versions that support Rails 4.2, so
-we need to make sure our `CreateArtist` migration inherits from
+This lesson was originally created with gem versions that support Rails **4.2**,
+so we need to make have our `CreateArtist` migration inherit from
 `ActiveRecord::Migration[4.2]`.
 
 Don't worry too much about this until you get to the Rails section. Until then,
-if you encounter an error like this... 
+if you encounter an error like this...
 
 ```text
 Caused by:
@@ -138,11 +138,12 @@ will generate our `artists` table with the appropriate columns.
 
 ### Creating a Table
 
-Remember how we created a table using SQL with ActiveRecord.
+Remember how we created a table using SQL with ActiveRecord?
 
 > **NOTE**: Recall, we can do this with IRB: `irb -r active_record`
 
-First, we'd have to connect to a database:
+First, we connect to a database, then write the necessary SQL to create the
+table. So, first, we'd have to connect to a database:
 
 ```ruby
 ActiveRecord::Base.establish_connection(
@@ -151,7 +152,7 @@ ActiveRecord::Base.establish_connection(
 )
 ```
 
-Then, we'd create our table using SQL:
+Then write some SQL to create the table:
 
 ```ruby
 sql = <<-SQL
@@ -167,8 +168,42 @@ SQL
 ActiveRecord::Base.connection.execute(sql)
 ```
 
-Now that we have access to `ActiveRecord::Migration`, we can create tables
-using only Ruby. Yay!
+Using migrations, we will still need establish Active Record's connection to the
+database, but **_we no longer need the SQL!_** Instead of dealing with SQL
+directly, we provide the migrations we want and Active Record takes care of creating 
+
+Since we still need to connect to the database, let's make the connection
+inside `config/environment.rb`:
+
+```ruby
+# config/environment.rb
+require 'rake'
+require 'active_record'
+require 'yaml/store'
+require 'ostruct'
+require 'date'
+
+require 'bundler/setup'
+Bundler.require
+
+# put the code to connect to the database here
+ActiveRecord::Base.establish_connection(
+  :adapter => "sqlite3",
+  :database => "db/artists.sqlite"
+)
+
+require_relative "../artist.rb"
+```
+
+> **Reminder**: The `environment.rb` file commonly contains things we want to
+> read and make available to our Ruby application when it starts. It isn't
+> necessary that you totally grasp all the parts of this file, but looking through
+> it with this in mind, you might be able to gather what is happening: some gems,
+> including `active_record` are required; something happens with `Bundler`; our
+> database connection is established; the `artist.rb` file is read.
+
+With the connection to the database configured, we should have access to
+`ActiveRecord::Migration`, and can create tables using only Ruby!
 
 ```ruby
 # db/migrate/01_create_artists.rb
@@ -216,16 +251,17 @@ through the `activerecord` gem. How do we access these?
 
 Run `rake -T` to see the list of commands we have.
 
-**Note**: If you get an error when trying to run `rake` commands, you may have a
-newer version of some gems that is conflicting with the versions bundled in this
-lab. To avoid this error, run `bundle exec rake -T`. Adding `bundle exec` is
-indicating that you want `rake` to run within the context of this lesson's
-bundle, not the default version of `rake` you may have installed.
+> **Note**: If you get an error when trying to run `rake` commands, you may have
+> a newer version of rake already installed compared to this lesson, causing a
+> conflict. To avoid this error, run `bundle exec rake -T`. Adding `bundle exec`
+> indicates that you want `rake` to run within the context of this lesson's
+> bundle (defined in the `Gemfile`), not the default version of `rake` you have
+> installed globally on your computer.
 
 Let's look at the `Rakefile`. The commands listed when running `rake -T` are
 made available as Rake tasks through `require 'sinatra/activerecord/rake'`.
 
-Now take a look at `environment.rb`, which our Rakefile also requires:
+Now take a look again at `environment.rb`, which our `Rakefile` also requires:
 
 ```ruby
 # config/environment.rb
@@ -410,4 +446,3 @@ Woohoo!
 [crud]: http://guides.rubyonrails.org/active_record_basics.html#crud-reading-and-writing-data
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/mechanics-of-migrations'>Mechanics of Migrations</a> on Learn.co and start learning to code for free.</p>
-
