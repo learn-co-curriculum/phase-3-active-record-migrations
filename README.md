@@ -6,19 +6,9 @@
 
 ## Setup
 
-1. We're going to use the `activerecord` gem to create a mapping between our
-   database and model.
-2. While this is marked as a Readme, you should code-along with this document.
-   If you have access to a Flatiron School sandbox (you'll see a blue button up
-   top), launch it. If you're working on a local system, simply open a new
-   terminal window.
-3. Once you're in a terminal environment, issue `git clone <clone source
-   path>`. You'll find the path by clicking on the "Clone or download" button
-   at the [repo][].
-4. `cd` into the cloned directory e.g. `cd mechanics-of-migrations-v-000/`
-5. Ensure you can `bundle` in the directory: `bundle install`
-6. If that works, then you're ready to proceed. If not, use a help resource
-   like Ask a Question or ask a facilitator.
+We're going to use the `activerecord` gem to create a mapping between our
+database and model. Clone down this lesson and code-along to get to the
+solution.
 
 ## Migrations
 
@@ -32,9 +22,9 @@ From [the _RailsGuides_ section on Migrations][guide-migrations]:
 
 > Migrations also allow you to describe these transformations using Ruby. The
 > great thing about this is that (like most of Active Record’s functionality)
-> it is database independent: you don’t need to worry about the precise syntax
+> it is database-independent: you don’t need to worry about the precise syntax
 > of `CREATE TABLE` any more than you worry about variations on `SELECT *` (you
-> can drop down to raw SQL for database specific features). For example, you
+> can drop down to raw SQL for database-specific features). For example, you
 > could use SQLite3 in development, but MySQL in production.
 
 Another way to think of migrations is like version control for your database.
@@ -77,10 +67,12 @@ mechanics-of-migrations-v-000/
   README.md
 ```
 
+With the file created, we'll need to add in the migration code:
+
 ```ruby
 # db/migrate/01_create_artists.rb
 
-class CreateArtists < ActiveRecord::Migration
+class CreateArtists < ActiveRecord::Migration[5.2]
   def up
   end
 
@@ -89,10 +81,35 @@ class CreateArtists < ActiveRecord::Migration
 end
 ```
 
+#### Active Record 5.x Migration Syntax Update
+
+**IMPORTANT**: Active Record is primarily used in Rails applications and as of
+Active Record 5.x, we must specify which version of Rails the migration
+was written for, even in situations like this lab where we do not have Rails
+set up.
+
+This lesson was originally created with gem versions that support Rails 4.2, so
+we need to make sure our `CreateArtist` migration inherits from
+`ActiveRecord::Migration[4.2]`.
+
+Don't worry too much about this until you get to the Rails section. Until then,
+if you encounter an error like this... 
+
+```text
+Caused by:
+StandardError: Directly inheriting from ActiveRecord::Migration is not supported. Please specify the Rails release the migration was written for:
+
+  class CreateArtists < ActiveRecord::Migration[4.2]
+```
+
+...simply add `[4.2]` or whatever number is displayed to the end of
+`ActiveRecord::Migration` in your migration file, exactly as the error message
+instructs.
+
 ### Active Record Migration Methods: up, down, change
 
 Here we're creating a class called `CreateArtists` that inherits from
-ActiveRecord's `ActiveRecord::Migration` module. Within the class we have an
+ActiveRecord's `ActiveRecord::Migration` module. Within the class, we have an
 `up` method to define the code to execute when the migration is run and a
 `down` method to define the code to execute when the migration is rolled back.
 Think of it like "do" and "undo."
@@ -103,7 +120,7 @@ more common for basic migrations.
 ```ruby
 # db/migrate/01_create_artists.rb
 
-class CreateArtists < ActiveRecord::Migration
+class CreateArtists < ActiveRecord::Migration[4.2]
   def change
   end
 end
@@ -112,9 +129,9 @@ end
 
 From [the Active Record Migrations RailsGuide][change-method]:
 
->The change method is the primary way of writing migrations. It works for the
->majority of cases, where Active Record knows how to reverse the migration
->automatically
+> The change method is the primary way of writing migrations. It works for the
+> majority of cases, where Active Record knows how to reverse the migration
+> automatically
 
 Let's take a look at how to finish off our `CreateArtists` migration, which
 will generate our `artists` table with the appropriate columns.
@@ -153,7 +170,6 @@ ActiveRecord::Base.connection.execute(sql)
 Now that we have access to `ActiveRecord::Migration`, we can create tables
 using only Ruby. Yay!
 
-
 ```ruby
 # db/migrate/01_create_artists.rb
 def change
@@ -167,12 +183,12 @@ want to create as a symbol. Pretty simple, right? Other methods we can use here
 are things like `remove_table`, `rename_table`, `remove_column`, `add_column`
 and others. See [this list][writing-mig] for more.
 
-No point in having a table that has no columns in it, so lets add a few:
+No point in having a table that has no columns in it, so let us add a few:
 
 ```ruby
 # db/migrate/01_create_artists.rb
 
-class CreateArtists < ActiveRecord::Migration
+class CreateArtists < ActiveRecord::Migration[4.2]
   def change
     create_table :artists do |t|
       t.string :name
@@ -185,7 +201,7 @@ end
 ```
 
 Looks a little familiar? On the left we've given the data type we'd like to
-cast the column as, and on the right we've given the name we'd like to give the
+cast the column as, and on the right, we've given the name we'd like to give the
 column. The only thing that we're missing is the primary key. Active Record
 will generate that column for us, and for each row added, a key will be
 auto-incremented.
@@ -200,8 +216,14 @@ through the `activerecord` gem. How do we access these?
 
 Run `rake -T` to see the list of commands we have.
 
-Let's look at the `Rakefile`. The way in which we get these commands as
-Rake tasks is through `require 'sinatra/activerecord/rake'`.
+**Note**: If you get an error when trying to run `rake` commands, you may have a
+newer version of some gems that is conflicting with the versions bundled in this
+lab. To avoid this error, run `bundle exec rake -T`. Adding `bundle exec` is
+indicating that you want `rake` to run within the context of this lesson's
+bundle, not the default version of `rake` you may have installed.
+
+Let's look at the `Rakefile`. The commands listed when running `rake -T` are
+made available as Rake tasks through `require 'sinatra/activerecord/rake'`.
 
 Now take a look at `environment.rb`, which our Rakefile also requires:
 
@@ -225,9 +247,10 @@ via SQLite3 (the adapter).
 After we've added the above code to `config/environment.rb`, it's time to run
 `rake db:migrate`.
 
-*Top Tip: If you encounter an error after running `rake db:migrate`, try running `bundle exec rake db:migrate`.*
+**Note**: Here again, if you encounter an error after running `rake db:migrate`,
+try running `bundle exec rake db:migrate`.
 
-4) Take a look at `artist.rb`. Let's create an Artist class.
+Take a look at `artist.rb`. Let's create an Artist class.
 
 ```ruby
 # artist.rb
@@ -245,9 +268,8 @@ class Artist < ActiveRecord::Base
 end
 ```
 
-To test our newly-created class out, let's use the rake task `rake console`,
-which we've created in the `Rakefile`.
-
+To test our newly-created class out, let's use the rake task `rake console` (or
+`bundle exec rake console`), which we've created in the `Rakefile`.
 
 ### Try Out The Following:
 
@@ -278,9 +300,9 @@ a.save
 # => true
 ```
 
-The `.new` method creates a new instance in memory, but in order for that
-instance to persist, we need to save it. If we want to create a new instance
-and save it all in one go, we can use `.create`.
+The `.new` method creates a new instance in memory, but for that instance to
+persist, we need to save it. If we want to create a new instance and save it all
+in one go, we can use `.create`.
 
 ```ruby
 Artist.create(name: 'Kelly')
@@ -302,7 +324,7 @@ Artist.find_by(name: 'Jon')
 # => #<Artist id: 1, name: "Jon", genre: nil, age: 30, hometown: nil>
 ```
 
-There are a number of methods you can now use to create, retrieve, update, and
+There are several methods you can now use to create, retrieve, update, and
 delete data from your database, and a whole lot more.
 
 Take a look at these [CRUD methods][crud], and play around with them.
@@ -326,7 +348,7 @@ To make this change we're going to need a new migration, which we'll call
 ```ruby
 # db/migrate/02_add_favorite_food_to_artists.rb
 
-class AddFavoriteFoodToArtists < ActiveRecord::Migration
+class AddFavoriteFoodToArtists < ActiveRecord::Migration[4.2]
   def change
     add_column :artists, :favorite_food, :string
   end
@@ -375,15 +397,16 @@ Artist.column_names
 # => ["id", "name", "genre", "age", "hometown"]
 ```
 
-Oh good, your job is saved. Thanks Active Record! When the boss says it's
+Oh good, your job is saved. Thanks, Active Record! When the boss says it's
 actually time to add that column, you can just run `rake db:migrate` again!
 
 Woohoo!
-
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/mechanics-of-migrations'>Mechanics of Migrations</a> on Learn.co and start learning to code for free.</p>
 
 [guide-migrations]: http://guides.rubyonrails.org/v3.2.8/migrations.html
 [repo]: https://github.com/learn-co-students/mechanics-of-migrations-v-000
 [change-method]: http://edgeguides.rubyonrails.org/active_record_migrations.html#using-the-change-method
 [writing-mig]: http://guides.rubyonrails.org/migrations.html#writing-a-migration
 [crud]: http://guides.rubyonrails.org/active_record_basics.html#crud-reading-and-writing-data
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/mechanics-of-migrations'>Mechanics of Migrations</a> on Learn.co and start learning to code for free.</p>
+
