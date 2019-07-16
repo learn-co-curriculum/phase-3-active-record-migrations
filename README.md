@@ -369,11 +369,11 @@ reality, our two-digit system is very rudimentary. As you'll see later on,
 frameworks like Rails have generators that create migrations with very accurate
 timestamps, so you'll never have to worry about hand-numbering.
 
-Now that you've saved the migration, go back to the terminal to run it:
+Now that you've saved the migration, go back to the terminal to run 
+`rake db:migrate`.
 
-`rake db:migrate`
-
-Awesome! Now go back to the console with the `rake console` command, and check it out:
+Awesome! Now go back to the console with the `rake console` command, and check
+it out:
 
 ```ruby
 Artist.column_names
@@ -387,10 +387,11 @@ that change yet! OH NO! No worries, we'll roll back to the first migration.
 
 Run `rake -T`. Which command should we use?
 
-`rake db:rollback`
+```bash
+rake db:rollback
+```
 
 Then drop back into the console to double check:
-
 
 ```ruby
 Artist.column_names
