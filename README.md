@@ -445,4 +445,4 @@ Woohoo!
 [writing-mig]: http://guides.rubyonrails.org/migrations.html#writing-a-migration
 [crud]: http://guides.rubyonrails.org/active_record_basics.html#crud-reading-and-writing-data
 
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/mechanics-of-migrations'>Mechanics of Migrations</a> on Learn.co and start learning to code for free.</p>
+
