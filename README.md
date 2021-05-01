@@ -1,8 +1,8 @@
-# Let's Learn About Migrations
+# Active Record Migrations
 
-## Objective
+## Learning Goals
 
-1. Create, connect to, and manipulate a SQLite database using ActiveRecord.
+- Create, connect to, and manipulate a SQLite database using Active Record
 
 ## Setup
 
@@ -444,5 +444,3 @@ Woohoo!
 [change-method]: http://edgeguides.rubyonrails.org/active_record_migrations.html#using-the-change-method
 [writing-mig]: http://guides.rubyonrails.org/migrations.html#writing-a-migration
 [crud]: http://guides.rubyonrails.org/active_record_basics.html#crud-reading-and-writing-data
-
-
