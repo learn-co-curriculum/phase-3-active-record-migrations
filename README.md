@@ -154,14 +154,15 @@ Running this command will generate a new file in `db/migrations` called
 migration is **crucial**, since it will be used as part of the version control
 for our migrations and ensure they are run in the correct order.
 
-```text
+```txt
+├── app
+│   └── models
+│       └── artist.rb
 ├── config
 │   └── environment.rb
 ├── db
 │   └── migrate
 │       └── 20210716095220_create_artists.rb # new file here
-├── lib
-│   └── artist.rb
 ├── spec
 ├── Gemfile
 ├── Gemfile.lock
@@ -313,11 +314,16 @@ and has updated the database successfully!
 
 ### Interacting With the Database
 
-Take a look at `lib/artist.rb`. Let's create an Artist class and extend the
-class with `ActiveRecord::Base`:
+Take a look at `app/models/artist.rb`. You'll notice our model code is in a
+slightly different file structure than before: in `app/models` instead of `lib`.
+The reason for this is that this file structure is commonly used in modular
+Sinatra applications as well as in Rails, so we'll set up our projects this way
+from here on out to give you exposure to this file structure.
+
+Let's create an Artist class and extend the class with `ActiveRecord::Base`:
 
 ```ruby
-# lib/artist.rb
+# app/models/artist.rb
 class Artist < ActiveRecord::Base
 end
 ```
@@ -404,6 +410,8 @@ To make this change we're going to need a new migration:
 ```sh
 bundle exec rake db:create_migration NAME=add_favorite_food_to_artists
 ```
+
+And add the migration code to the file:
 
 ```ruby
 # db/migrate/20210716100800_add_favorite_food_to_artists.rb
@@ -512,12 +520,18 @@ column (as well as the name of the _file_ and the name of the _class_, just to
 make this change clear):
 
 ```rb
+# db/migrate/20210716100800_add_favorite_flower_to_artists.rb
 class AddFavoriteFlowerToArtists < ActiveRecord::Migration[6.1]
   def change
     add_column :artists, :favorite_flower, :string
   end
 end
 ```
+
+> **Note**: If you change the class name in the file, but don't also change the
+> file name, the migration will error out. Active Record is very particular
+> about its conventions! Make sure to change the file name as well:
+> `20210716100800_add_favorite_flower_to_artists.rb`.
 
 Now, run the migration again and check the status:
 
