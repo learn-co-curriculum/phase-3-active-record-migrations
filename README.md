@@ -154,14 +154,15 @@ Running this command will generate a new file in `db/migrations` called
 migration is **crucial**, since it will be used as part of the version control
 for our migrations and ensure they are run in the correct order.
 
-```text
+```txt
+├── app
+│   └── models
+│       └── artist.rb
 ├── config
 │   └── environment.rb
 ├── db
 │   └── migrate
 │       └── 20210716095220_create_artists.rb # new file here
-├── lib
-│   └── artist.rb
 ├── spec
 ├── Gemfile
 ├── Gemfile.lock
@@ -313,11 +314,16 @@ and has updated the database successfully!
 
 ### Interacting With the Database
 
-Take a look at `lib/artist.rb`. Let's create an Artist class and extend the
-class with `ActiveRecord::Base`:
+Take a look at `app/models/artist.rb`. You'll notice our model code is in a
+slightly different file structure than before: in `app/models` instead of `lib`.
+The reason for this is that this file structure is commonly used in modular
+Sinatra applications as well as in Rails, so we'll set up our projects this way
+from here on out to give you exposure to this file structure.
+
+Let's create an Artist class and extend the class with `ActiveRecord::Base`:
 
 ```ruby
-# lib/artist.rb
+# app/models/artist.rb
 class Artist < ActiveRecord::Base
 end
 ```
