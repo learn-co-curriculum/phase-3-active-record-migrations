@@ -405,6 +405,8 @@ To make this change we're going to need a new migration:
 bundle exec rake db:create_migration NAME=add_favorite_food_to_artists
 ```
 
+And add the migration code to the file:
+
 ```ruby
 # db/migrate/20210716100800_add_favorite_food_to_artists.rb
 class AddFavoriteFoodToArtists < ActiveRecord::Migration[6.1]
@@ -512,12 +514,18 @@ column (as well as the name of the _file_ and the name of the _class_, just to
 make this change clear):
 
 ```rb
+# db/migrate/20210716100800_add_favorite_flower_to_artists.rb
 class AddFavoriteFlowerToArtists < ActiveRecord::Migration[6.1]
   def change
     add_column :artists, :favorite_flower, :string
   end
 end
 ```
+
+> **Note**: If you change the class name in the file, but don't also change the
+> file name, the migration will error out. Active Record is very particular
+> about its conventions! Make sure to change the file name as well:
+> `20210716100800_add_favorite_flower_to_artists.rb`.
 
 Now, run the migration again and check the status:
 
