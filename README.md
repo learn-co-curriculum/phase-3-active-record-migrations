@@ -206,8 +206,10 @@ the code to execute when the migration is **run** and a `down` method to define
 the code to execute when the migration is **rolled back**. Think of it like "do"
 and "undo."
 
-Let's take a look at how to finish off our `CreateArtists` migration, which
-will generate our `artists` table with the appropriate columns.
+Let's take a look at how to finish off our `CreateArtists` migration, which will
+generate our `artists` table with the appropriate columns. Remember, table names
+are **plural**, so we're creating an `artists` table, which we'll use with an
+`Artist` class.
 
 ```ruby
 # db/migrate/20210716095220_create_artists.rb
@@ -238,6 +240,7 @@ class CreateArtists < ActiveRecord::Migration[6.1]
       t.string :genre
       t.integer :age
       t.string :hometown
+      # the id column is gemerated automatically for every table! no need to specify it here.
     end
   end
 end
@@ -258,7 +261,8 @@ read):
 
 ```rb
 create_table :artists do |t|
-  t.string(:name)  # t.string is a method that takes a symbol as an argument and creates a column
+  # t.string is a method that takes a symbol as an argument and creates a column
+  t.string(:name)
   t.string(:genre)
   t.integer(:age)
   t.string(:hometown)
@@ -329,13 +333,15 @@ The reason for this is that this file structure is commonly used in modular
 Sinatra applications as well as in Rails, so we'll set up our projects this way
 from here on out to give you exposure to this file structure.
 
-Let's create an Artist class and extend the class with `ActiveRecord::Base`:
+Let's create an `Artist` class and extend the class with `ActiveRecord::Base`:
 
 ```ruby
 # app/models/artist.rb
 class Artist < ActiveRecord::Base
 end
 ```
+
+Remember: **singular** class name, **plural** table name.
 
 To test our newly created class out, let's use the `console` Rake task which
 we've created in the `Rakefile`:
