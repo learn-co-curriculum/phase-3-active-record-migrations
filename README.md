@@ -19,15 +19,15 @@ important steps at the end.
 From [the _Rails Guides_ section on Migrations][guide-migrations]:
 
 > Migrations are a convenient way to alter your database schema over time in a
-> consistent way. They use a Ruby DSL so that you don't have to write SQL by hand,
-> allowing your schema and changes to be database independent.
+> consistent way. They use a Ruby DSL so that you don't have to write SQL by
+> hand, allowing your schema and changes to be database independent.
 >
 > You can think of each migration as being a new 'version' of the database. A
 > schema starts off with nothing in it, and each migration modifies it to add or
 > remove tables, columns, or entries. Active Record knows how to update your
-> schema along this timeline, bringing it from whatever point it is in the history
-> to the latest version. Active Record will also update your `db/schema.rb` file to
-> match the up-to-date structure of your database.
+> schema along this timeline, bringing it from whatever point it is in the
+> history to the latest version. Active Record will also update your
+> `db/schema.rb` file to match the up-to-date structure of your database.
 
 Why might you need something like version control for your database? You might
 create a table, add some data to it, and then make some changes to it later on.
@@ -49,8 +49,8 @@ table. So, first, we'd have to connect to a database:
 
 ```ruby
 ActiveRecord::Base.establish_connection(
-  :adapter => "sqlite3",
-  :database => "db/artists.sqlite"
+  adapter: "sqlite3",
+  database: "db/artists.sqlite"
 )
 ```
 
@@ -75,8 +75,8 @@ database, but **_we no longer need the SQL!_** Instead of dealing with SQL
 directly, we provide the migrations we want and Active Record takes care of
 creating and modifying the tables.
 
-To tell Active Record how to connect to the database, we'll use a
-`config/database.yml` file. This file is used by convention to give Active
+To tell Active Record how to connect to the database from here on out, we'll use
+a `config/database.yml` file. This file is used by convention to give Active
 Record the necessary details about how to connect to our database, like which
 "adapter" we are using (right now, we're using SQLite, but Active Record
 supports other database such as MySQL and PostgreSQL as well), and the name of
@@ -97,8 +97,8 @@ previously, just in a different format:
 
 ```rb
 ActiveRecord::Base.establish_connection(
-  :adapter => "sqlite3",
-  :database => "db/artists.sqlite"
+  adapter: "sqlite3",
+  database: "db/artists.sqlite"
 )
 ```
 
@@ -140,6 +140,10 @@ them to create our first migration.
 `ENV["RACK_ENV"]` here is known as an **environment variable**. In this case,
 this environment variable determines whether our code is running in a
 development environment, or a test environment (when running RSpec tests).
+`RACK_ENV` is a specific environment variable that is used by the
+`sinatra-activerecord` gem to determine which database to connect to: in our
+`environment.rb` file, we're specifying that it should use the `development`
+database, which is configured in the `database.yml` file.
 
 ### Creating Migrations Using a Rake Task
 
@@ -170,9 +174,9 @@ for our migrations and ensure they are run in the correct order.
 ```
 
 > If you noticed, there's also a `.gitkeep` file in the `db/migrate` folder. You
-> can delete this file. Since Git won't track an empty directory, creating an
-> empty `.gitkeep` file is a convention for creating folders with no content and
-> keeping them in your Git repository.
+> can delete this file after creating the migration. Since Git won't track an
+> empty directory, creating an empty `.gitkeep` file is a convention for
+> creating folders with no content and keeping them in your Git repository.
 
 In addition to creating the migration file, that Rake task also added some
 code for us:
@@ -218,6 +222,10 @@ want to create as a symbol. Pretty simple, right? Other methods we can use here
 are things like `remove_table`, `rename_table`, `remove_column`, `add_column`
 and others. See [this list][writing-migrations] for more.
 
+After the table name `:artists` we write a block of code that is passed a block
+parameter `t`, which is a special Active Record migration object that helps add
+different columns to the table.
+
 No point in having a table that has no columns in it, so let us add a few:
 
 ```ruby
@@ -239,7 +247,7 @@ Looks a little familiar? On the left, we've given the **data type** we'd like to
 cast the column as, and on the right, we've given the **name** we'd like to give
 the column.
 
-The only thing that we're missing is the primary key. Active Record will
+The only thing that we're missing is the _primary key_. Active Record will
 generate that column for us, and for each row added, a key will be
 auto-incremented.
 
@@ -250,7 +258,7 @@ read):
 
 ```rb
 create_table :artists do |t|
-  t.string(:name)
+  t.string(:name)  # t.string is a method that takes a symbol as an argument and creates a column
   t.string(:genre)
   t.integer(:age)
   t.string(:hometown)
@@ -266,6 +274,7 @@ It's time to run our migration. Run this command:
 
 ```sh
 $ bundle exec rake db:migrate
+
 == 20210716095220 CreateArtists: migrating ====================================
 -- create_table(:artists)
    -> 0.0008s
