@@ -1,15 +1,6 @@
-require 'rake'
-require 'active_record'
-require 'yaml/store'
-require 'ostruct'
-require 'date'
-
+ENV["RACK_ENV"] ||= "development"
 
 require 'bundler/setup'
-Bundler.require
+Bundler.require(:default, ENV["RACK_ENV"])
 
-
-# put the code to connect to the database here
-
-
-require_relative "../artist.rb"
+require_relative "../app/models/artist"

@@ -1,29 +1,41 @@
-require_relative '../config/environment'
-require 'rake'
-load './Rakefile'
+ENV['RACK_ENV'] ||= 'test'
+require_relative "../config/environment"
+require "sinatra/activerecord/rake"
 
 RSpec.configure do |config|
-  config.run_all_when_everything_filtered = true
-  config.filter_run :focus
+  # Database setup
+  if ActiveRecord::Base.connection.migration_context.needs_migration?
+    # Run migrations for test environment
+    Rake::Task["db:migrate"].execute
+  end
 
   config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before do
     DatabaseCleaner.strategy = :transaction
-    begin
-      DatabaseCleaner.clean_with(:truncation)
-    rescue
-      puts "Database not yet created in config/environment.rb!"
-    end
   end
 
-  config.around(:each) do |example|
-    begin
-      DatabaseCleaner.cleaning do
-        example.run
-      end
-    rescue
-      puts "Database not yet created in config/environment.rb!"
-    end
+  config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
   end
 
-  config.order = 'default'
+  config.before do
+    DatabaseCleaner.start
+  end
+
+  config.after do
+    DatabaseCleaner.clean
+  end
+
+  config.expect_with :rspec do |expectations|
+    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  config.mock_with :rspec do |mocks|
+    mocks.verify_partial_doubles = true
+  end
+  
+  config.shared_context_metadata_behavior = :apply_to_host_groups
 end
