@@ -70,8 +70,8 @@ SQL
 ActiveRecord::Base.connection.execute(sql)
 ```
 
-Using migrations, we will still need establish Active Record's connection to the
-database, but **_we no longer need the SQL!_** Instead of dealing with SQL
+Using migrations, we will still need to establish Active Record's connection to
+the database, but **_we no longer need the SQL!_** Instead of dealing with SQL
 directly, we provide the migrations we want and Active Record takes care of
 creating and modifying the tables.
 
@@ -106,9 +106,9 @@ With the connection to the database configured, we can move on to the next step.
 
 ### Active Record Rake Tasks
 
-The simplest way is to work with migrations is through Rake tasks that we're
-given through a new gem, the `sinatra-activerecord` gem. This gem provides some
-common Rake tasks for working with Active Record.
+The simplest way to work with migrations is through Rake tasks that we're given
+through a new gem, the `sinatra-activerecord` gem. This gem provides some common
+Rake tasks for working with Active Record.
 
 Run `rake -T` to see the list of commands we have.
 
