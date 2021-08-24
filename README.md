@@ -47,7 +47,7 @@ created a table using SQL with Active Record?
 First, we connect to a database, then write the necessary SQL to create the
 table. So, first, we'd have to connect to a database:
 
-```ruby
+```rb
 ActiveRecord::Base.establish_connection(
   adapter: "sqlite3",
   database: "db/artists.sqlite"
@@ -56,7 +56,7 @@ ActiveRecord::Base.establish_connection(
 
 Then write some SQL to create the table:
 
-```ruby
+```rb
 sql = <<-SQL
   CREATE TABLE IF NOT EXISTS artists (
   id INTEGER PRIMARY KEY,
@@ -125,7 +125,7 @@ made available as Rake tasks through `require 'sinatra/activerecord/rake'`.
 
 Now take a look again at `environment.rb`, which our `Rakefile` also requires:
 
-```ruby
+```rb
 # config/environment.rb
 ENV["RACK_ENV"] ||= "development"
 
@@ -149,8 +149,8 @@ database, which is configured in the `database.yml` file.
 
 To create a migration for setting up our `artists` table, run this command:
 
-```sh
-bundle exec rake db:create_migration NAME=create_artists
+```console
+$ bundle exec rake db:create_migration NAME=create_artists
 ```
 
 Running this command will generate a new file in `db/migrations` called
@@ -181,7 +181,7 @@ for our migrations and ensure they are run in the correct order.
 In addition to creating the migration file, that Rake task also added some
 code for us:
 
-```ruby
+```rb
 # db/migrate/20210716095220_create_artists.rb
 class CreateArtists < ActiveRecord::Migration[6.1]
   def change
@@ -211,7 +211,7 @@ generate our `artists` table with the appropriate columns. Remember, table names
 are **plural**, so we're creating an `artists` table, which we'll use with an
 `Artist` class.
 
-```ruby
+```rb
 # db/migrate/20210716095220_create_artists.rb
 def change
   create_table :artists do |t|
@@ -230,7 +230,7 @@ different columns to the table.
 
 No point in having a table that has no columns in it, so let us add a few:
 
-```ruby
+```rb
 # db/migrate/20210716095220_create_artists.rb
 
 class CreateArtists < ActiveRecord::Migration[6.1]
@@ -276,7 +276,7 @@ going to see it in action!
 
 It's time to run our migration. Run this command:
 
-```sh
+```console
 $ bundle exec rake db:migrate
 
 == 20210716095220 CreateArtists: migrating ====================================
@@ -312,7 +312,7 @@ migration.
 
 You can also use this Rake task to see the status of your migrations:
 
-```sh
+```console
 $ bundle exec rake db:migrate:status
 
 database: db/development.sqlite3
@@ -335,7 +335,7 @@ from here on out to give you exposure to this file structure.
 
 Let's create an `Artist` class and extend the class with `ActiveRecord::Base`:
 
-```ruby
+```rb
 # app/models/artist.rb
 class Artist < ActiveRecord::Base
 end
@@ -346,20 +346,20 @@ Remember: **singular** class name, **plural** table name.
 To test our newly created class out, let's use the `console` Rake task which
 we've created in the `Rakefile`:
 
-```sh
-bundle exec rake console
+```console
+$ bundle exec rake console
 ```
 
 Check that the class exists:
 
-```ruby
+```rb
 Artist
 # => Artist (call 'Artist.connection' to establish a connection)
 ```
 
 View the columns in its corresponding table in the database:
 
-```ruby
+```rb
 Artist.column_names
 # => ["id", "name", "genre", "age", "hometown"]
 ```
@@ -367,7 +367,7 @@ Artist.column_names
 Instantiate a new Artist named Jon, set his age to 30, and save him to the
 database:
 
-```ruby
+```rb
 a = Artist.new(name: 'Jon')
 # => #<Artist id: nil, name: "Jon", genre: nil, age: nil, hometown: nil>
 
@@ -382,14 +382,14 @@ The `.new` method creates a new instance in memory, but for that instance to
 persist, we need to save it. If we want to create a new instance and save it all
 in one go, we can use `.create`.
 
-```ruby
+```rb
 Artist.create(name: 'Kelly')
 # => #<Artist id: 2, name: "Kelly", genre: nil, age: nil, hometown: nil>
 ```
 
 Return an array of all Artists from the database:
 
-```ruby
+```rb
 Artist.all
 # => [#<Artist id: 1, name: "Jon", genre: nil, age: 30, hometown: nil>,
  #<Artist id: 2, name: "Kelly", genre: nil, age: nil, hometown: nil>]
@@ -397,7 +397,7 @@ Artist.all
 
 Find an Artist by name:
 
-```ruby
+```rb
 Artist.find_by(name: 'Jon')
 # => #<Artist id: 1, name: "Jon", genre: nil, age: 30, hometown: nil>
 ```
@@ -422,13 +422,13 @@ current database structure.
 
 To make this change we're going to need a new migration:
 
-```sh
-bundle exec rake db:create_migration NAME=add_favorite_food_to_artists
+```console
+$ bundle exec rake db:create_migration NAME=add_favorite_food_to_artists
 ```
 
 And add the migration code to the file:
 
-```ruby
+```rb
 # db/migrate/20210716100800_add_favorite_food_to_artists.rb
 class AddFavoriteFoodToArtists < ActiveRecord::Migration[6.1]
   def change
@@ -451,13 +451,13 @@ task!
 
 Now that you've saved the migration, go back to the terminal to run:
 
-```sh
-bundle exec rake db:migrate
+```console
+$ bundle exec rake db:migrate
 ```
 
 Check the status of the migration:
 
-```sh
+```console
 $ bundle exec rake db:migrate:status
 
 database: db/development.sqlite3
@@ -485,7 +485,7 @@ end
 Awesome! Now go back to the console with the `rake console` command, and check
 it out:
 
-```ruby
+```rb
 Artist.column_names
 # => ["id", "name", "genre", "age", "hometown", "favorite_food"]
 ```
@@ -499,13 +499,13 @@ migration.
 
 Run `rake -T`. Which command should we use? That's right: `db:rollback`:
 
-```sh
-bundle exec rake db:rollback
+```console
+$ bundle exec rake db:rollback
 ```
 
 Check the status of the migration:
 
-```sh
+```console
 $ bundle exec rake db:migrate:status
 
 database: db/development.sqlite3
@@ -550,7 +550,7 @@ end
 
 Now, run the migration again and check the status:
 
-```sh
+```console
 $ bundle exec rake db:migrate
 $ bundle exec rake db:migrate:status
 database: db/development.sqlite3
