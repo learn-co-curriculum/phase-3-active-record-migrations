@@ -7,12 +7,12 @@
 ## Setup
 
 We're going to use the Active Record gem to create a mapping between our
-database and model. Clone down this lesson and code along to get to the
-solution. Then, run `bundle install` to set up the dependencies.
+database and model. This is a long lesson, and there are a lot of important
+steps to successfully work with Active Record, so make sure to code along. We'll
+summarize the important steps at the end.
 
-This is a long lesson, but there are a lot of important steps to successfully
-work with Active Record, so make sure to code along. We'll summarize the
-important steps at the end.
+Start by cloning down this lesson, then run `bundle install` to set up the
+dependencies.
 
 ## Migrations
 
@@ -79,8 +79,8 @@ To tell Active Record how to connect to the database from here on out, we'll use
 a `config/database.yml` file. This file is used by convention to give Active
 Record the necessary details about how to connect to our database, like which
 "adapter" we are using (right now, we're using SQLite, but Active Record
-supports other database such as MySQL and PostgreSQL as well), and the name of
-the database file. Here's what it looks like:
+supports other database adapters such as MySQL and PostgreSQL as well), and the
+name of the database file. Here's what it looks like:
 
 ```yml
 development:
@@ -285,7 +285,7 @@ $ bundle exec rake db:migrate
 == 20210716095220 CreateArtists: migrated (0.0009s) ===========================
 ```
 
-When we run this command, a few of things will happen:
+When we run this command, a few things will happen:
 
 - Active Record will create a new database file, if one doesn't already exist,
   based on the configuration in the `database.yml` file
@@ -575,7 +575,7 @@ it's a bad idea to go back in time and rewrite that history.
 ## Conclusion
 
 Migrations are a crucial part of any Active Record application. They provide a
-consistent way to setup and update your database tables, without having to write
+consistent way to set up and update your database tables, without having to write
 any SQL code by hand.
 
 To add a feature to the database, such as creating or altering a table, here is
