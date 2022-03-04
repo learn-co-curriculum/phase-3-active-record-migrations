@@ -240,7 +240,7 @@ class CreateArtists < ActiveRecord::Migration[6.1]
       t.string :genre
       t.integer :age
       t.string :hometown
-      # the id column is gemerated automatically for every table! no need to specify it here.
+      # the id column is generated automatically for every table! no need to specify it here.
     end
   end
 end
