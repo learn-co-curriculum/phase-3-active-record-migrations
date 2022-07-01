@@ -41,7 +41,7 @@ the appropriate time.
 
 ### Creating a Table
 
-One common task when working with database is creating tables. Remember how we
+One common task when working with databases is creating tables. Remember how we
 created a table using SQL with Active Record?
 
 First, we connect to a database, then write the necessary SQL to create the
