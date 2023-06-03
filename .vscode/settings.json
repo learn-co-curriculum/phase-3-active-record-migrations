@@ -1,0 +1,10 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "manu",
+      "database": "C:\\Users\\Administrator\\OneDrive\\Desktop\\manu\\manu.db"
+    }
+  ]
+}
