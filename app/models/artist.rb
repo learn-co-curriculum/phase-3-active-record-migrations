@@ -1,1 +1,3 @@
-# add the Artist class here
+# add the Artist class 
+class Artist < ActiveRecord::Base
+end
