@@ -16,6 +16,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_25_135940) do
     t.string "genre"
     t.integer "age"
     t.string "hometown"
-    t.string "favorite_food"
+    t.string "favorite_flower"
   end
 end
