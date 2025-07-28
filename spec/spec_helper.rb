@@ -5,6 +5,7 @@ require "sinatra/activerecord/rake"
 RSpec.configure do |config|
   # Database setup
   if ActiveRecord::Base.connection.migration_context.needs_migration?
+    config.before(:suite) do
     # Run migrations for test environment
     Rake::Task["db:migrate"].execute
   end
@@ -38,4 +39,5 @@ RSpec.configure do |config|
   end
   
   config.shared_context_metadata_behavior = :apply_to_host_groups
+  end
 end
